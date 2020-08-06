@@ -1,0 +1,68 @@
+easy_admin:
+   site_name: 'Symfony <em style="font-size: 80%;">Assignment.</em>'
+   list:
+        max_results: 5
+   entities:
+        # List the entity class name you want to manage
+        Platform:
+            class: App\Entity\Platform
+            label: 'Platforms'
+            list:
+                title: '%%entity_label%% Listing'
+                fields:
+                    - id
+                    - name
+            form:
+                fields:
+                    - name
+        Provider:
+            class: App\Entity\Provider
+            label: 'Providers'
+            list:
+                title: '%%entity_label%% Listing'
+                fields:
+                    - id
+                    - name
+                    - description
+            form:
+                fields:
+                    - name
+                    - owner
+                    - email
+                    - { property: 'phone', type: 'tel' }
+                    - address
+                    - { property: 'description', type: 'text-editor' }
+        Product:
+            class: App\Entity\Product
+            label: 'Products'
+            list:
+                title: '%%entity_label%% Listing'
+                fields:
+                    - id
+                    - name
+                    - description
+                    - { property: 'image', type: 'image' }
+            form:
+                fields:
+                    - name
+                    - { property: 'description', type: 'text-editor' }
+                    - image
+                    - provider
+        Software:
+            class: App\Entity\Software
+            label: 'Softwares'
+            list:
+                title: '%%entity_label%% Listing'
+                fields:
+                    - id
+                    - product
+                    - platform
+                    - version
+                    - price
+            form:
+                fields:
+                    - product
+                    - platform
+                    - version
+                    - { property: 'price', type: 'money', type_options: { currency: 'USD' } }
+                    - download_path

@@ -1,0 +1,60 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+ <div class="col-lg-12">
+    <div class="row ptb50">
+        <a href="#"><img class="card-img-top" src="" alt=""></a>
+        <div class="card-body">
+          <h1 class="card-title">
+            {{single_provider.name}}
+          </h1>
+          <p class="card-text">{{single_provider.description}}</p>
+          <p class="card-text"><b>Owner:</b> {{single_provider.owner}}</p>
+          <p class="card-text"><b>Email:</b> {{single_provider.email}}</p>
+          <p class="card-text"><b>Phone:</b> {{single_provider.phone}}</p>
+          <p class="card-text"><b>Address:</b> {{single_provider.address}}</p>
+
+           <h5 class="ptb30"> Products by <b>{{single_provider.name}}</b> </h5>
+           <div class="row">
+            {% if single_provider.getProducts() is empty %}
+                <div class="col-md-12">
+                  <em>No products Found</em>
+                </div>
+            {% else %}
+              {% for product in single_provider.getProducts() %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                  <div class="card h-100">
+                    <a href="{{url('product_single',{'id':product.id})}}"><img class="card-img-top" src="{{product.getImage()}}" alt=""></a>
+                    <div class="card-body">
+                      <h4 class="card-title">
+                        <a href="{{url('product_single',{'id':product.id})}}">{{product.name}}</a>
+                      </h4>
+
+                      {% set price = product.getSoftware()|last.price %}
+                      <h5>${{price}}</h5>
+                      
+                      <b>Platforms Suported : </b>
+                      {% for software in product.getSoftware() %}
+                        {{ software.getPlatform().getName()|upper() }} 
+                        {% if not loop.last %},{% endif %}
+                      {% endfor %}
+
+                      <p class="card-text">{{product.description|raw}}</p>
+                    </div>  
+                    <div class="card-footer product-btn">
+                        <a href="{{url('product_single',{'id':product.id})}}" class="btn btn-primary">Find out more</a>
+                        <a href="{{url('product_single',{'id':product.id})}}" class="btn btn-primary">Add to cart</a>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}               
+            {% endif %}
+           </div>
+        </div>
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.col-lg-12 -->
+
+{% endblock %}

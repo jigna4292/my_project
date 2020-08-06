@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Homepage{% endblock %}
+{% block stylesheets %}
+	<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"/>
+	<link href="{{ asset('css/shop-homepage.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block body %}
+	  {{ include('header.html.twig') }}
+
+	  <!-- Page Content -->
+	  <div class="container">
+	    <div class="row">
+	    	{% block content %}
+	    	{% endblock %}
+	    </div>
+	    <!-- /.row -->
+	  </div>
+	  <!-- /.container -->
+	  
+	  {{ include('footer.html.twig') }}
+
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('js/jquery.min.js') }}"></script>
+	<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+{% endblock %}
