@@ -31,7 +31,7 @@ easy_admin:
                     - email
                     - { property: 'phone', type: 'tel' }
                     - address
-                    - { property: 'description', type: 'text-editor' }
+                    - description
         Product:
             class: App\Entity\Product
             label: 'Products'
@@ -45,7 +45,7 @@ easy_admin:
             form:
                 fields:
                     - name
-                    - { property: 'description', type: 'text-editor' }
+                    - description
                     - image
                     - provider
         Software:
