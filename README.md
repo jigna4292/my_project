@@ -34,9 +34,21 @@ Some basic Git commands are:
 For DB Creation : php bin/console doctrine:database:create
 For Migration : php bin/console doctrine:migrations:migrate
 ```
-Note: 4 tables will create in your database, i.e Platform, Product, Provider and Software. 
+Note: 4 tables will create in your database, i.e Platform, Product, Provider and Software.
 
-5) Add entity class config/packages/easy_admin.yaml
+5) Start symfony server from CMD of your project location
+```
+symfony server:start
+```
+Note: Your project url will be http://127.0.0.1:8000 or http:localhost:8080. You can see the URl in to the success message of web server started. 
+
+6) Open browser hit : http://127.0.0.1:8000/admin/ to see the admin panel
+Add data for each entity to see the website perfectly. 
+Note: For image and File you can use external URL. 
+
+7)  If admin panel not opening properly then follow below step :
+
+Add entity class config/packages/easy_admin.yaml ( IF NEEDED )
 Code for the mentioned file:
 ```
 easy_admin:
@@ -48,14 +60,4 @@ easy_admin:
         - App\Entity\ProductPlatform
 ```
 
-6) Start symfony server from CMD of your project location
-```
-symfony server:start
-```
-Note: Your project url will be http://127.0.0.1:8000 or http://localhost:8080. You can see the URl in to the success message of web server started.
-
-8) Open browser hit : http://127.0.0.1:8000/admin/ to see the admin panel
-Add data for each entity to see the website perfectly. 
-Note: For image and File you can use external URL. 
-
-9) Finally you can see the http://127.0.0.1:8000/ here :)
+8) Finally you can see the http://127.0.0.1:8000/ here :)
