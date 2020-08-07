@@ -52,7 +52,7 @@ easy_admin:
 ```
 symfony server:start
 ```
-Note: Your project url will be http://127.0.0.1:8000 or http:localhost:8080. You can see the URl in to the success message of web server started.
+Note: Your project url will be http://127.0.0.1:8000 or http://localhost:8080. You can see the URl in to the success message of web server started.
 
 8) Open browser hit : http://127.0.0.1:8000/admin/ to see the admin panel
 Add data for each entity to see the website perfectly. 
