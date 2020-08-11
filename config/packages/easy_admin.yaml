@@ -32,3 +32,9 @@ easy_admin:
                     - description
                     - price
                     - { property: 'image', type: 'image' }
+            form:
+                fields:
+                    - name
+                    - description
+                    - image
+                    - provider
