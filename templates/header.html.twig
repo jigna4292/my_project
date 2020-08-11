@@ -16,14 +16,13 @@
         <a class="nav-link" href="{{url('providers')}}">Provider</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{{url('products')}}">Product</a>
+        <a class="nav-link" href="{{url('bundles')}}">Bundle</a>
       </li>     
     </ul>
-    <select>
-      <option>Us Doller</option>
-      <option>Indian Rupee</option>
-      <option>Australian Doller</option>
-      <option>South Africa Rand</option>
+    <select id="currency_selector">
+      <option value="USD" symbol="$" selected>Us Doller</option>
+      <option value="EUR" symbol="€" >Euro</option>
+      <option value="ZAR" symbol="R" >South African Rands</option>
     </select>
   </div>
 </div>

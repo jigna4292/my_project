@@ -12,6 +12,7 @@
 	  <!-- Page Content -->
 	  <div class="container">
 	    <div class="row">
+	    	<input type="hidden" value="{{api_key}}" name="hiddenkey">
 	    	{% block content %}
 	    	{% endblock %}
 	    </div>
@@ -26,4 +27,5 @@
 {% block javascripts %}
 	<script src="{{ asset('js/jquery.min.js') }}"></script>
 	<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+	<script src="{{ asset('js/fixer.js') }}"></script>
 {% endblock %}

@@ -12,9 +12,6 @@ easy_admin:
                 fields:
                     - id
                     - name
-            form:
-                fields:
-                    - name
         Provider:
             class: App\Entity\Provider
             label: 'Providers'
@@ -24,45 +21,14 @@ easy_admin:
                     - id
                     - name
                     - description
-            form:
-                fields:
-                    - name
-                    - owner
-                    - email
-                    - { property: 'phone', type: 'tel' }
-                    - address
-                    - { property: 'description', type: 'text-editor' }
-        Product:
-            class: App\Entity\Product
-            label: 'Products'
+        Bundle:
+            class: App\Entity\Bundle
+            label: 'Bundles'
             list:
                 title: '%%entity_label%% Listing'
                 fields:
                     - id
                     - name
                     - description
-                    - { property: 'image', type: 'image' }
-            form:
-                fields:
-                    - name
-                    - { property: 'description', type: 'text-editor' }
-                    - image
-                    - provider
-        Software:
-            class: App\Entity\Software
-            label: 'Softwares'
-            list:
-                title: '%%entity_label%% Listing'
-                fields:
-                    - id
-                    - product
-                    - platform
-                    - version
                     - price
-            form:
-                fields:
-                    - product
-                    - platform
-                    - version
-                    - { property: 'price', type: 'money', type_options: { currency: 'USD' } }
-                    - download_path
+                    - { property: 'image', type: 'image' }

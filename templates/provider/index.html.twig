@@ -13,7 +13,16 @@
 	            </h4>
 	          </div>
 	          <div class="card-body">
-	              <p class="card-text">{{provider.description|raw}}</p>
+	              <p class="card-text">{{provider.description|slice(0, 150) ~ '...'}}</p>
+
+	              <h6>
+	              Platform Supported by this provider are : 
+		           {% for provider in provider.getPlatform() %}
+		             {{provider.getName()}}
+
+		             {% if not loop.last %}, {% endif %}
+		           {% endfor %}
+		          </h6>
 	          </div>
 	          <div class="card-footer">
 	             <a href="{{url('provider_single',{'id':provider.id})}}" class="btn btn-primary">Find out more</a>

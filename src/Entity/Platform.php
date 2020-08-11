@@ -22,16 +22,22 @@ class Platform
     /**
      * @ORM\Column(type="string", length=150)
      */
-    private $name;
+    private $Name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Software::class, mappedBy="platform")
+     * @ORM\ManyToMany(targetEntity=Provider::class, mappedBy="Platform")
      */
-    private $platform;
+    private $providers;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Bundle::class, mappedBy="Platform", orphanRemoval=true)
+     */
+    private $bundles;
 
     public function __construct()
     {
-        $this->platform = new ArrayCollection();
+        $this->providers = new ArrayCollection();
+        $this->bundles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -41,48 +47,76 @@ class Platform
 
     public function getName(): ?string
     {
-        return $this->name;
+        return $this->Name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $Name): self
     {
-        $this->name = $name;
+        $this->Name = $Name;
 
         return $this;
     }
 
     /**
-     * @return Collection|Software[]
+     * @return Collection|Provider[]
      */
-    public function getPlatform(): Collection
+    public function getProviders(): Collection
     {
-        return $this->platform;
+        return $this->providers;
     }
 
-    public function addPlatform(Software $platform): self
+    public function addProvider(Provider $provider): self
     {
-        if (!$this->platform->contains($platform)) {
-            $this->platform[] = $platform;
-            $platform->setPlatform($this);
+        if (!$this->providers->contains($provider)) {
+            $this->providers[] = $provider;
+            $provider->addPlatform($this);
         }
 
         return $this;
     }
 
-    public function removePlatform(Software $platform): self
+    public function removeProvider(Provider $provider): self
     {
-        if ($this->platform->contains($platform)) {
-            $this->platform->removeElement($platform);
+        if ($this->providers->contains($provider)) {
+            $this->providers->removeElement($provider);
+            $provider->removePlatform($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Bundle[]
+     */
+    public function getBundles(): Collection
+    {
+        return $this->bundles;
+    }
+
+    public function addBundle(Bundle $bundle): self
+    {
+        if (!$this->bundles->contains($bundle)) {
+            $this->bundles[] = $bundle;
+            $bundle->setPlatform($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBundle(Bundle $bundle): self
+    {
+        if ($this->bundles->contains($bundle)) {
+            $this->bundles->removeElement($bundle);
             // set the owning side to null (unless already changed)
-            if ($platform->getPlatform() === $this) {
-                $platform->setPlatform(null);
+            if ($bundle->getPlatform() === $this) {
+                $bundle->setPlatform(null);
             }
         }
 
         return $this;
     }
 
-    public function __toString() {
-         return $this->name;
-    }
+    public function __tostring() {
+     return $this->Name;
+   }
 }

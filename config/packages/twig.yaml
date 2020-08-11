@@ -6,3 +6,4 @@ twig:
     globals:
        app_name: '%env(APP_NAME)%'
        copyright: '%env(APP_COPYRIGHT)%'
+       api_key: '%env(APP_CURRENCY_API_KEY)%'

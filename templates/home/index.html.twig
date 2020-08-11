@@ -36,7 +36,7 @@
               </h4>
             </div>
 	          <div class="card-body">
-	            <p class="card-text">{{provider.description}}</p>
+	            <p class="card-text">{{provider.description|slice(0, 150) ~ '...'}}</p>
 	          </div>
             <div class="card-footer">
               <a href="{{url('provider_single',{'id':provider.id})}}" class="btn btn-primary">Find out more</a>
@@ -44,9 +44,9 @@
 	        </div>
 	      </div>
 	  {% endfor %}
+    </div>
     <div class="btn-align-center">
       <a href="{{url('providers')}}" class="btn btn-primary btn-large">All Providers</a>
-    </div>
     </div>
     <!-- /.row -->
 
@@ -56,33 +56,26 @@
     {% for product in products|slice(0,3) %}
       <div class="col-lg-4 col-md-6 mb-4">
         <div class="card h-100">
-          <a href="{{url('product_single',{'id':product.id})}}"><img class="card-img-top" src="{{product.getImage()}}" alt=""></a>
+          <a href="{{url('bundle_single',{'id':product.id})}}"><img class="card-img-top" src="{{product.getImage()}}" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">
-              <a href="{{url('product_single',{'id':product.id})}}">{{product.name}}</a>
+              <a href="{{url('bundle_single',{'id':product.id})}}">{{product.name}}</a>
             </h4>
 
-            {% set price = product.getSoftware()|last.price %}
-      	    <h5>${{price}}</h5>
+      	    <h5><span class="currency_symbol"></span> <span id="product_{{product.id}}"> {{product.price}}</span></h5>
 
-            <b>Platforms Suported : </b>
-            {% for software in product.getSoftware() %}
-              {{ software.getPlatform().getName()|upper() }} 
-              {% if not loop.last %},{% endif %}
-            {% endfor %}
-
-            <p class="card-text">{{product.description|raw}}</p>
+            <p class="card-text">{{product.description|slice(0, 150) ~ '...'}}</p>
           </div>	
           <div class="card-footer product-btn">
-              <a href="{{url('product_single',{'id':product.id})}}" class="btn btn-primary">Find out more</a>
-              <a href="{{url('product_single',{'id':product.id})}}" class="btn btn-primary">Add to cart</a>
+              <a href="{{url('bundle_single',{'id':product.id})}}" class="btn btn-primary">Find out more</a>
+              <a href="{{url('bundle_single',{'id':product.id})}}" class="btn btn-primary">Add to cart</a>
           </div>
         </div>
       </div>
     {% endfor %}
-    <div class="btn-align-center">
-      <a href="{{url('products')}}" class="btn btn-primary btn-large">All Products</a>
     </div>
+    <div class="btn-align-center">
+      <a href="{{url('bundles')}}" class="btn btn-primary btn-large">All Bundles</a>
     </div>
     <!-- /.row -->
 

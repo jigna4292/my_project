@@ -1,0 +1,24 @@
+{% extends 'bundle/index.html.twig' %}
+
+{% block content %}
+   <siv class="col-md-12">
+    <div class="ptb50 single-product">
+        <img src="{{single_product.getImage()}}" alt="" />
+          <div class="product-title ptb20">
+            <h1>{{single_product.name}}</h1>
+            <p>{{single_product.description}}</p>
+          </div>
+          <div class="provider-details pb30">
+            <h5><b> Provider : <a href="{{url('provider_single',{'id':single_product.getProvider.id})}}">{{single_product.getProvider().getName()}}</a></b></h5>
+            <h5><b>Platform Supported is {{single_product.getPlatform().getName()}} </b></h5>
+          </div>
+          <div class="desc-sec pb30">
+            <h5>Price is <b><span class="currency_symbol"></span> <span id="product_{{single_product.id}}">{{single_product.price}}</span></b></h5>
+          </div>
+
+          <button class="btn btn-primary">Add to Cart</button>
+      </div>
+    </div>
+    </div>
+    <!-- /.row -->
+{% endblock %}

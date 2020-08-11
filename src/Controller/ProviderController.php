@@ -7,7 +7,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ProviderRepository;
 use App\Entity\Provider;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Response;
 
 class ProviderController extends AbstractController
 {
@@ -16,19 +15,17 @@ class ProviderController extends AbstractController
      */
     public function index()
     {
-         $providers = $this->getDoctrine()
+    	$providers = $this->getDoctrine()
 	        ->getRepository(Provider::class)
-	        ->findAll(); 
+	        ->findAll();
 
-	    return $this->render('provider/index.html.twig', [
-	    	'logo_name' => 'Symfony Assignment',
-        	'title_sec' => 'Provider Listing',
-        	'providers' => $providers,
-        	'copyright_txt' => 'Copyright 2020',
+        return $this->render('provider/index.html.twig', [
+            'title_sec' => 'Provider Listing',
+            'providers' => $providers
         ]);
     }
 
-     /**
+    /**
      * @Route("/provider/{id}", name="provider_single")
      */
 
@@ -47,13 +44,7 @@ class ProviderController extends AbstractController
 	    //return new Response('Check out this great product: '.$product->getName());
 
 	    return $this->render('provider/single.html.twig', [
-	    	'logo_name' => 'Symfony Assignment',
         	'single_provider' => $provider,
-        	'copyright_txt' => 'Copyright 2020',
         ]);
-
-	    // or render a template
-	    // in the template, print things with {{ product.name }}
-	    // return $this->render('product/show.html.twig', ['product' => $product]);
 	}
 }
