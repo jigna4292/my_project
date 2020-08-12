@@ -56,8 +56,7 @@ easy_admin:
         # change the following to the namespaces of your own entities
         - App\Entity\Platform
         - App\Entity\Provider
-        - App\Entity\Product
-        - App\Entity\ProductPlatform
+        - App\Entity\Bundle
 ```
 
 8) Finally you can see the http://127.0.0.1:8000/ here :)
