@@ -34,6 +34,7 @@ class Bundle
 
     /**
      * @ORM\ManyToOne(targetEntity=Provider::class, inversedBy="bundles")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $Provider;
 
@@ -118,8 +119,28 @@ class Bundle
     }
 
     public function getImage(): ?string
-    {
-        return $this->Image;
+    {        
+        if( isset( $_GET['action'] ) ) {
+
+           if( $_GET['action'] == 'list' ) {
+             if (strpos($this->Image, '\\') !== false) {
+               $image_arr = explode('\\', $this->Image);
+               return end($image_arr);
+             } else {
+               return $this->Image;
+             }
+           } else {
+               return $this->Image;  
+           }
+
+         } else {
+            if (strpos($this->Image, '\\') !== false) {
+               $image_arr = explode('\\', $this->Image);
+               return end($image_arr);
+             } else {
+               return $this->Image;
+             }
+         }
     }
 
     public function setImage(string $Image): self

@@ -35,13 +35,12 @@ class BundleController extends AbstractController
 	        ->getRepository(Bundle::class)
 	        ->find($id);
 
-	    if (!$product) {
-	        throw $this->createNotFoundException(
-	            'No bundle found for id '.$id
-	        );
+	    if (!$product) {	        
+            return $this->render('error.html.twig', [
+                 'page_title' => '404 Page Not Found',
+                 'message' => 'Sorry, Bundle Not Found !!!'
+             ]);
 	    }
-
-	    //return new Response('Check out this great product: '.$product->getName());
 
 	    return $this->render('bundle/single.html.twig', [
         	'single_product' => $product,

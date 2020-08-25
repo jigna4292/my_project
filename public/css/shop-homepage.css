@@ -10,6 +10,7 @@ body {
 .ptb30{padding:30px 0px}
 .ptb20{padding:20px 0px}
 .pb30{padding:0px 0px 30px}
+.align-center{text-align:center;}
 .card-header,.card-footer {
     text-align: center;
 }

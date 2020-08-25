@@ -3,7 +3,7 @@
 {% block content %}
    <siv class="col-md-12">
     <div class="ptb50 single-product">
-        <img src="{{single_product.getImage()}}" alt="" />
+        <img src="{{ absolute_url(asset('uploads/' ~ single_product.getImage())) }}" alt="" />
           <div class="product-title ptb20">
             <h1>{{single_product.name}}</h1>
             <p>{{single_product.description}}</p>
@@ -20,5 +20,4 @@
       </div>
     </div>
     </div>
-    <!-- /.row -->
 {% endblock %}

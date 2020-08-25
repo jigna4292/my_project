@@ -1,76 +1,70 @@
 // set endpoint and your access key
 endpoint = 'latest'
 access_key = $('input[name=hiddenkey]').val();
-var products;
 
 $(document).ready(function(){
 
-    $.ajax({  
-       url:        '/productajax',  
-       type:       'POST',   
-       dataType:   'json',  
-       async:      false,  
-       
-       success: function(data, status) {  
-          products = data.message;
+    //Check cookie is set if not set to default USD
+    var getData = checkCookie();
 
-          var getData = checkCookie();
+    if(getData){
+       $( "#currency_selector").val(getData);
+       $( "#currency_selector option:selected" ).attr("selected","selected");
+    } else {
+       $( "#currency_selector").val("USD");
+       $( "#currency_selector option:selected" ).attr("selected","selected");
+    }   
 
-          $( "#currency_selector").val(getData);
-          $( "#currency_selector option:selected" ).attr("selected","selected");
+    var to = $( "#currency_selector option:selected" ).val();
+    var currency_symbol = $( "#currency_selector option:selected" ).attr('symbol');
 
-          var currency_symbol = $( "#currency_selector option:selected" ).attr('symbol');
-
-          getPrice(getData,currency_symbol);
-
-      },  
-       error : function(xhr, textStatus, errorThrown) {  
-          alert('Ajax request failed.');  
-       }  
-    }); 
+    //Get conversion of the selected value
+    getPrice(to,currency_symbol);
 
     $('#currency_selector').change(function(){
 
         var element = $(this).find('option:selected');
         var value_selected = $(this).val();
 
+        //set cookie to the changed value
         setCookie('setCurrency',value_selected,1);
         var currency = getCookie("setCurrency");
 
         currency_symbol = element.attr('symbol');  
 
-        getPrice(currency,currency_symbol);     
+        //Get conversion of the selected value
+        getPrice(value_selected,currency_symbol);     
 
     });
 });
 
 function getPrice(to,symbol){
   if(access_key){
-        // get the most recent exchange rates via the "latest" endpoint:
-        $.ajax({
-            url: 'http://data.fixer.io/api/' + endpoint + '?access_key=' + access_key,    
-            dataType: 'jsonp',
-            async : false,
-            success: function(json) {
+    $.ajax({
+        url: '/getPrice?to='+to+'&endpoint='+endpoint+'&key='+access_key,    
+        dataType: 'json',
+        success: function(data, status) {  
 
-               if(json.error){
-                   alert("Please check your API Key. We got response " + json.error['info']) 
-               }  else {
-                 var base = json.rates[to];      
-                 var convert_to_eur = 1/json.rates["USD"];
+           var status = data.status;
+           var product_price = data.message;
 
-                 for(i=0; i<products.length ; i++) {
-                     var converted_price_to_eur =  products[i].price * convert_to_eur ;
-                     var converted_price = converted_price_to_eur * base;
-                     $('.currency_symbol').text(symbol);
-                     $('#product_'+products[i].id).text(Number(converted_price.toFixed(2)));
-                 }
-               }                  
-            }
-        });
-    } else {
-        alert("Please add your API KEY in .env file");
-    }
+           if(product_price.error){
+               //Display Error msg of API
+               alert("Please check your API Key. We got response " + product_price.error['info']) 
+           }  else {
+             //Update converted price for each product
+             for(i=0; i<product_price.length ; i++) {
+                 var converted_price = product_price[i].price;
+                 $('.currency_symbol').text(symbol);
+                 $('#product_'+product_price[i].id).text(Number(converted_price.toFixed(2)));
+             }
+           }                 
+        }
+    });
+  } else {
+    //Display error for the API Key is not entered
+    alert("Please Update API Key in .ENV file for the price conversion");
+  }
 }
 
 function setCookie(cname, cvalue, exdays) {
@@ -98,14 +92,7 @@ function getCookie(cname) {
 function checkCookie() {
   var currency = getCookie("setCurrency");
   if (currency != "") {
-    if(currency != "$"){
       return currency;
-    } else {
-      currency = "USD";
-      if (currency != "" && currency != null) {
-        setCookie("setCurrency", currency, 1);
-      }
-    }
   } else {
     currency = $( "#currency_selector option:selected" ).val();
     if (currency != "" && currency != null) {

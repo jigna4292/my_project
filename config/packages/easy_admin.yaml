@@ -12,6 +12,9 @@ easy_admin:
                 fields:
                     - id
                     - name
+            form:
+                fields:
+                    - { property: 'name', type: 'text', type_options: { required: true } }
         Provider:
             class: App\Entity\Provider
             label: 'Providers'
@@ -21,6 +24,11 @@ easy_admin:
                     - id
                     - name
                     - description
+            form:
+                fields:
+                    - { property: 'name', type: 'text' , type_options: { required: true } }
+                    - { property: 'description' , type: 'textarea' , type_options: { required: true }}
+                    - Platform
         Bundle:
             class: App\Entity\Bundle
             label: 'Bundles'
@@ -31,4 +39,12 @@ easy_admin:
                     - name
                     - description
                     - price
-                    - { property: 'image', type: 'image' }
+                    - { property: 'image', type: 'image', base_path: '/uploads/' }
+            form:
+                fields:
+                    - { property: 'name', type: 'text' , type_options: { required: true } }
+                    - { property: 'description', type: 'textarea' , type_options: { required: true } }
+                    - { property: 'price', type: 'text' , type_options: { required: true } }
+                    - { property: 'image' , type: 'file_upload' , type_options: { upload_dir: 'public/uploads/',required: true }}
+                    - Provider
+                    - Platform

@@ -36,12 +36,11 @@ class ProviderController extends AbstractController
 	        ->find($id);
 
 	    if (!$provider) {
-	        throw $this->createNotFoundException(
-	            'No product found for id '.$id
-	        );
+	        return $this->render('error.html.twig', [
+                 'page_title' => '404 Page Not Found',
+                 'message' => 'Sorry, Provider Not Found !!!'
+             ]);
 	    }
-
-	    //return new Response('Check out this great product: '.$product->getName());
 
 	    return $this->render('provider/single.html.twig', [
         	'single_provider' => $provider,
