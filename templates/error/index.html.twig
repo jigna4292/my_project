@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Error Page!{% endblock %}
+
+{% block content %}
+<div class="container ptb50 align-center">
+   <h1>Opps! something went wrong...</h1>
+
+   <h3>Error Code : {{ error_code }}</h3>
+   <h6>{{error_message}}</h6>
+   <p>Please click here to return back to <a href="/">Home</a></p>
+</div>
+
+{% endblock %}
