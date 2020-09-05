@@ -45,6 +45,6 @@ easy_admin:
                     - { property: 'name', type: 'text' , type_options: { required: true } }
                     - { property: 'description', type: 'textarea' , type_options: { required: true } }
                     - { property: 'price', type: 'text' , type_options: { required: true } }
-                    - { property: 'image' , type: 'file_upload' , type_options: { upload_dir: 'public/uploads/',required: true }}
+                    - { property: 'image' , type: 'file_upload' , type_options: { upload_dir: 'public/uploads/'}}
                     - Provider
                     - Platform

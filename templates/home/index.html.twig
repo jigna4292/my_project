@@ -61,7 +61,11 @@
               <a href="{{url('bundle_single',{'id':product.id})}}">{{product.name}}</a>
             </h4>
 
-      	    <h5><span class="currency_symbol"></span> <span id="product_{{product.id}}"> {{product.price}}</span></h5>
+            {% if product_price %}
+      	       <h5><span class="currency_symbol">{{  symbol }}</span> <span id="product_{{product.id}}"> {{product_price[loop.index0].price|round(2)}}</span></h5>
+            {% else %}
+              <h5><span class="currency_symbol">{{  symbol }}</span> <span id="product_{{product.id}}"> {{product.price|round(2)}}</span></h5>
+            {% endif %}
 
             <p class="card-text">{{product.description|slice(0, 150) ~ '...'}}</p>
           </div>	

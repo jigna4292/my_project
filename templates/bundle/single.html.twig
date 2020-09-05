@@ -13,9 +13,12 @@
             <h5><b>Platform Supported is {{single_product.getPlatform().getName()}} </b></h5>
           </div>
           <div class="desc-sec pb30">
-            <h5>Price is <b><span class="currency_symbol"></span> <span id="product_{{single_product.id}}">{{single_product.price}}</span></b></h5>
+            {% if product_price %}
+                <h5>Price is <b><span class="currency_symbol">{{symbol}}</span> <span id="product_{{single_product.id}}">{{product_price|round(2)}}</span></b></h5>
+            {% else %}
+               <h5>Price is <b><span class="currency_symbol">{{symbol}}</span> <span id="product_{{single_product.id}}">{{single_product.price}}</span></b></h5>
+            {% endif %}
           </div>
-
           <button class="btn btn-primary">Add to Cart</button>
       </div>
     </div>

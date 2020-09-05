@@ -18,10 +18,11 @@
         <a class="nav-link" href="{{url('bundles')}}">Bundle</a>
       </li>     
     </ul>
+    {% set cookie_name = app.request.cookies.get('selected_currency') %}
     <select id="currency_selector">
-      <option value="USD" symbol="$">Us Doller</option>
-      <option value="EUR" symbol="€">Euro</option>
-      <option value="ZAR" symbol="R">South African Rands</option>
+      <option value="USD" symbol="$" {% if cookie_name == "USD" %} selected  {% endif %}>Us Doller</option>
+      <option value="EUR" symbol="€" {% if cookie_name == "EUR" %} selected {% endif %}>Euro</option>
+      <option value="ZAR" symbol="R" {% if cookie_name == "ZAR" %} selected {% endif %}>South African Rands</option>
     </select>
   </div>
 </div>
