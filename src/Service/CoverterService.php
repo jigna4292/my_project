@@ -45,7 +45,6 @@ class ConverterService
     }
 
     public function getAPIRates(Request $request){
-       $response = new Response();
 
        $api_domain = $_ENV['API_DOMAIN'];
        $access_key = $_ENV['APP_CURRENCY_API_KEY'];
