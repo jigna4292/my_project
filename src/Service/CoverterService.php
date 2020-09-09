@@ -88,13 +88,7 @@ class ConverterService
 	            ));
 	        }
 	    }
-
-	    if(\is_null($products_array)){
-	    	return $products_array;
-	    }else { ?>
-        	<script>alert("Please Update API Key in .ENV file for the price conversion");</script>
-       <?php }
-        
+	    return $products_array;   
     }
 
     public function singlePriceChange(Request $request, $product_price, $to = NULL){
